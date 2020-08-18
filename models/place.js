@@ -5,7 +5,7 @@ const placeSchema = new mongoose.Schema({
     kind_of_place: String,
     area: String,
     description: String,
-    score_avg: String,
+    score_avg: Number,
     wifi: Boolean,
     handicap: Boolean,
     swimming_pool: Boolean,

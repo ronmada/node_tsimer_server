@@ -1,14 +1,30 @@
  
 
-GET http://localhost:5000/
+GET http://localhost:5000/places
 
 ###
 
-POST http://localhost:5000/
+GET http://localhost:5000/places/5f3bf251af5c4518951b9458
+###
+POST http://localhost:5000/places
 Content-Type: application/json
 
 {
-    "name" : "Hello World",
+    "name" : "Hiho",
     "wifi" : true,
     "price_night" : 150
+}
+###
+
+GET http://fathomless-crag-75187.herokuapp.com/
+
+
+###
+POST http://fathomless-crag-75187.herokuapp.com/
+Content-Type: application/json
+
+{
+    "name" : "Hi there",
+    "wifi" : false,
+    "price_night" : 100
 }
