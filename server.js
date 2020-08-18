@@ -15,6 +15,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }).
   then(() => {
     console.log("Connected to DB")
+    console.log("Hello world : "+ process.env.DATABASE_URL)
     //  mongoose.connection.db.dropCollection('places', function(err, result) {}); //drop collection
 
     // fs.readFile('./hotel_data.json', 'utf8', async (err, jsonString) => {
