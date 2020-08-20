@@ -2,8 +2,11 @@ const express = require('express')
 const router = express.Router()
 const Place = require('../models/place')
 
+var i=0
+var j=0
 //getting all
 router.get('/', async (req, res) => {
+    console.log("GETTING ALL ROUTE : " + ++i)
     try {
         const places = await Place.find()
         res.json(places);
@@ -13,9 +16,11 @@ router.get('/', async (req, res) => {
 });
 
 //getting one
-router.get('/:id',getPlace, (req, res) => {
+router.get('/:id', getPlace, (req, res) => {
+    console.log("GETTING ONE ROUTE : " + ++j)
     res.json(res.place)
 })
+
 //creating one
 router.post('/', async (req, res) => {
     const place = new Place({
@@ -33,24 +38,43 @@ router.post('/', async (req, res) => {
 })
 
 //updating one
-router.patch('/:id', (req, res) => {
+router.patch('/:id', getPlace, async (req, res) => {
+    res.place.name = req.body.name
+    try {
+        console.log("saving changes for " + res.place['_id'])
+        console.log("new name should be " + req.body.name)
+        const updatedPlace = await res.place.save()
+        console.log("AA")
+        res.status(201).json(updatedPlace)
+        console.log("BB")
+    } catch (err) {
+        res.status(400).json({ messge: err.message })
+    }
 
 })
 //delete one
-router.delete('/:id', (req, res) => {
-
+router.delete('/:id', getPlace, async (req, res) => {
+    const id = res.place['_id']
+    try {
+        console.log("deleteing  " + id)
+        const newPlace = await res.place.delete()
+        console.log(`${id} successfuly deleted.. also the deleted place was : ${newPlace}`)
+        res.status(201).json(newPlace)
+    } catch (err) {
+        res.status(500).json({ messge: err.message })
+    }
 })
 
 async function getPlace(req, res, next) {
-    let place
+    let place = new Place()
     try {
         place = await Place.findById(req.params.id)
         console.log(place)
         if (place == null) {
-            return res.status(404).json({message : 'cannot find place'})
+            return res.status(404).json({ message: 'cannot find place' })
         }
     } catch (err) {
-        return res.status(500).json({message : err.message})
+        return res.status(500).json({ message: err.message })
     }
     res.place = place
     next()
