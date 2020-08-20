@@ -14,13 +14,4 @@ const placeSchema = new mongoose.Schema({
     price_night: Number,
 });
 
-// const Place = mongoose.model("Place", placeSchema);
-
-// const place = new Place({
-//     name: 'hello',
-//     price_night: 25,
-//     wifi: true
-// });
-
-// place.save();
 module.exports = mongoose.model("Place", placeSchema);

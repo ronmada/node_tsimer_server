@@ -1,8 +1,8 @@
 const fs = require('fs')
 const Place = require('./models/place')
 
-module.exports = function (){
-    fs.readFile('./hotel_data.json', 'utf8', async (err, jsonString) => {
+module.exports = function () {
+    fs.readFile('./hotel_app_data.json', 'utf8', async (err, jsonString) => {
         if (err) {
             console.log("Error reading file from disk:", err)
             return
@@ -12,13 +12,12 @@ module.exports = function (){
             place_json = JSON.parse(jsonString)
             console.log(place_json[0])
             await Place.insertMany(place_json)
-                .then(function (mongooseDocuments) {
-                    /* ... */
+                .then(mongooseDocuments => {
+                    console.log("Success" + mongooseDocuments[0])
                 })
-                .catch(function (err) {
-                    /* Error handling */
+                .catch(err => {
+                    console.log("something went wrong  " + err)
                 });
-            console.log("Success")
         } catch (err) {
             console.log("Failure" + err)
         }
