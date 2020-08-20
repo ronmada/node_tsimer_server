@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Place = require('../models/place')
 
-var i=0
-var j=0
+var i = 0
+var j = 0
 //getting all
 router.get('/', async (req, res) => {
     console.log("GETTING ALL ROUTE : " + ++i)
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 //getting one
-router.get('/:id', getPlace, (req, res) => {
+router.get('/id/:id', getPlace, (req, res) => {
     console.log("GETTING ONE ROUTE : " + ++j)
     res.json(res.place)
 })
@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
         res.status(400).json({ messge: err.message })
     }
 })
+
 
 //updating one
 router.patch('/:id', getPlace, async (req, res) => {
@@ -64,6 +65,30 @@ router.delete('/:id', getPlace, async (req, res) => {
         res.status(500).json({ messge: err.message })
     }
 })
+
+
+//get area,animal
+router.get('/special', getSpecial, async (req, res) => {
+    console.log("/places/special")
+    res.json(res.place)
+})
+
+async function getSpecial(req, res, next) {
+    console.log("Get special middleware")
+    const obj = {
+        "area": req.query.area,
+        "animal": req.query.animal
+    }
+    console.log("params are : " + JSON.stringify(obj))
+    try {
+        place = await Place.find(obj).exec()
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+    res.place = place
+    next()
+}
 
 async function getPlace(req, res, next) {
     let place = new Place()

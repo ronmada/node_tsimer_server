@@ -4,7 +4,7 @@ GET http://localhost:5000/places
 
 ###
 
-GET http://localhost:5000/places/5f3bf251af5c4518951b945a
+GET http://localhost:5000/places/id/5f3eb98b372984107d16d704
 ###
 POST http://localhost:5000/places
 Content-Type: application/json
@@ -41,3 +41,12 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:5000/places/5f3bf251af5c4518951b9459
+
+###
+GET http://localhost:5000/places/special/
+Content-Type: application/json
+
+{
+    "area" : "צפון",
+    "animal" : true
+}
