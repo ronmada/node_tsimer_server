@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Place = require('../models/place')
+const getPlaceObject = require('../getPlaceObject')
 
 var i = 0
 var j = 0
@@ -75,13 +76,11 @@ router.get('/special', getSpecial, async (req, res) => {
 
 async function getSpecial(req, res, next) {
     console.log("Get special middleware")
-    const obj = {
-        "area": req.query.area,
-        "animal": req.query.animal
-    }
+    const obj =  getPlaceObject(req)
     console.log("params are : " + JSON.stringify(obj))
     try {
         place = await Place.find(obj).exec()
+        console.log(place.length)
     }
     catch (err) {
         return res.status(500).json({ message: err.message })

@@ -48,5 +48,7 @@ Content-Type: application/json
 
 {
     "area" : "צפון",
-    "animal" : true
+    "animal" : true,
+    "handicap" : true,
+    "shaabaat_keep" : false
 }
