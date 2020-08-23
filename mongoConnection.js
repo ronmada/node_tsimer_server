@@ -7,7 +7,6 @@ module.exports = function () {
         then(() => {
             console.log("Connected to DB")
             //  mongoose.connection.db.dropCollection('places', function(err, result) {}); //drop collection
-        },
-            err => console.log("some error connecting to DB : " + { messge: err.message })
-        );
+        }
+        ).catch((err) => console.log("some error connecting to DB : " + { messge: err.message }));
 }

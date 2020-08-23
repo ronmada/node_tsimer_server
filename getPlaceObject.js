@@ -1,17 +1,23 @@
 module.exports = function (req) {
+    let _body = {}
+    Object.keys(req.body).length ? _body = req.body : _body = req.query
+    Object.keys(_body).forEach(key => (console.log(_body[key])))
+    console.log(_body['animal'])
     const obj = {
-        "area": req.body.area,
-        "animal": req.body.animal,
-        "handicap": req.body.handicap,
-        "kind_of_place": req.body.kind_of_place,
-        "description": req.body.description,
-        "score_avg": req.body.score_avg,
-        "wifi": req.body.wifi,
-        "handicap": req.body.handicap,
-        "swimming_pool": req.body.swimming_pool,
-        "shaabaat_keep": req.body.shaabaat_keep,
-        "price_night": req.body.price_night
+        "area": _body.area,
+        "animal": _body.animal,
+        "handicap": _body.handicap,
+        "kind_of_place": _body.kind_of_place,
+        "description": _body.description,
+        "score_avg": _body.score_avg,
+        "wifi": _body.wifi,
+        "handicap": _body.handicap,
+        "swimming_pool": _body.swimming_pool,
+        "shaabaat_keep": _body.shaabaat_keep,
+        "price_night": _body.price_night
     }
-    Object.keys(obj).forEach(key => obj[key] === undefined && delete obj[key])
+    Object.keys(obj).forEach(key => (obj[key] ===  undefined) && delete obj[key])
+    console.log("params")
+    console.log(_body)
     return obj
 }

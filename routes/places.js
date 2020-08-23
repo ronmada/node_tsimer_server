@@ -74,14 +74,15 @@ router.get('/special', getSpecial, async (req, res) => {
     res.json(res.place)
 })
 
+
 async function getSpecial(req, res, next) {
     console.log("Get special middleware")
     const obj =  getPlaceObject(req)
-    console.log("params are : " + JSON.stringify(obj))
     try {
         place = await Place.find(obj).exec()
-        console.log(place.length)
+        console.log(`number of matched: ${place.length}`)
     }
+    
     catch (err) {
         return res.status(500).json({ message: err.message })
     }
