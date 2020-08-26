@@ -70,12 +70,12 @@ router.delete('/:id', getPlace, async (req, res) => {
 
 //get area,animal
 router.get('/special', getSpecial, async (req, res) => {
-    console.log("/places/special")
-    res.json(res.place)
+    res.status(200).json(res.place)
 })
 
 
 async function getSpecial(req, res, next) {
+    console.log(req.headers)
     console.log("Get special middleware")
     const obj =  getPlaceObject(req)
     try {

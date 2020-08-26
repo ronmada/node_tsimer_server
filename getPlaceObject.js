@@ -1,8 +1,8 @@
 module.exports = function (req) {
     let _body = {}
+    if(Object.keys(req.body).length) console.log("from body")
+    else console.log("from query")
     Object.keys(req.body).length ? _body = req.body : _body = req.query
-    Object.keys(_body).forEach(key => (console.log(_body[key])))
-    console.log(_body['animal'])
     const obj = {
         "area": _body.area,
         "animal": _body.animal,
