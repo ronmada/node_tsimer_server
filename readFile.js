@@ -2,7 +2,7 @@ const fs = require('fs')
 const Place = require('./models/place')
 
 module.exports = function () {
-    fs.readFile('./hotel_app_data.json', 'utf8', async (err, jsonString) => {
+    fs.readFile('./hotel_app_json_data.json', 'utf8', async (err, jsonString) => {
         if (err) {
             console.log("Error reading file from disk:", err)
             return

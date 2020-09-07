@@ -12,6 +12,12 @@ const placeSchema = new mongoose.Schema({
     animal: Boolean,
     shaabaat_keep: Boolean,
     price_night: Number,
+    city: String,
+    country: String,
+    address: String,
+    phone: String,
+    email: String,
+    location : String
 });
 
 module.exports = mongoose.model("Place", placeSchema);

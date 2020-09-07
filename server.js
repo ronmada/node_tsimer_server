@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const router = express.Router();
 const cors = require("cors");
 const mongoConnection = require("./mongoConnection");
-const readFile = require("./readFile");
-
+// const readFile = require("./readFile");
+/*global process*/
+/*eslint no-undef: "error"*/
 const app = express(); //init express app
 app.use(express.json()); // Make sure it comes back as json
 app.use(express.urlencoded({ extended: false }));
@@ -15,7 +15,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); //start s
 //readFile()    // get all places
 mongoConnection();
 routersInit();
-app.get("/", (req, res) => {
+app.get("/", () => {
   console.log("main root");
 });
 function routersInit() {

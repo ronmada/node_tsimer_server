@@ -11,7 +11,6 @@ module.exports = function (req) {
         "description": _body.description,
         "score_avg": _body.score_avg,
         "wifi": _body.wifi,
-        "handicap": _body.handicap,
         "swimming_pool": _body.swimming_pool,
         "shaabaat_keep": _body.shaabaat_keep,
         "price_night": _body.price_night

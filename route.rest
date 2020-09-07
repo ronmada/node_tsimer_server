@@ -43,7 +43,7 @@ Content-Type: application/json
 DELETE http://localhost:5000/places/5f3bf251af5c4518951b9459
 
 ###
-GET http://localhost:5000/places/special/
+POST http://localhost:5000/places/special/
 Content-Type: application/json
 
 {
