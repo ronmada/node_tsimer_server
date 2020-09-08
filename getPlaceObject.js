@@ -13,7 +13,13 @@ module.exports = function (req) {
         "wifi": _body.wifi,
         "swimming_pool": _body.swimming_pool,
         "shaabaat_keep": _body.shaabaat_keep,
-        "price_night": _body.price_night
+        "price_night": _body.price_night,
+        "city": _body.city,
+        "country": _body.country,
+        "address": _body.address,
+        "phone": _body.phone,
+        "email": _body.email,
+        "location" : _body.location
     }
     Object.keys(obj).forEach(key => (obj[key] ===  undefined) && delete obj[key])
     console.log("params")

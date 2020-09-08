@@ -77,9 +77,6 @@ async function getlocations(req, res, next) {
     for (let index in loca) {
       arr.push(loca[index].location)
     }
-    [...new Set(arr)];
-    arr.sort();
-    console.log("number of locations " + arr.length);
     res.locations = arr;
   } catch (err) {
     return res.status(500).json({ message: err.message });
