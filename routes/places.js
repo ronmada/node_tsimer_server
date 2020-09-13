@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Place = require("../models/place");
-const getPlaceObject = require("../getPlaceObject");
+const { getTime } = require("./getTime");
+// const getPlaceObject = require("../getPlaceObject");
+
+router.use(getTime)
 
 var i = 0;
 var j = 0;
@@ -70,21 +73,22 @@ router.get("/locations", getlocations, async (req, res) => {
   res.status(200).json(res.locations);
 });
 async function getlocations(req, res, next) {
-  console.log("getting all possible locations from DB");
   try {
+    console.log("getting all possible locations from DB" , res.timeNow);
     let loca = await Place.find({}, "location -_id").lean();
-    let arr = []
+    let arr = [];
     for (let index in loca) {
-      arr.push(loca[index].location)
+      arr.push(loca[index].location);
     }
     res.locations = arr;
+    next();
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  next();
+  
 }
 //get area,animal
-router.get("/special", getSpecial, async (req, res) => {
+router.get("/special", getSpecial, (req, res) => {
   res.status(200).json(res.place);
 });
 // router.post('/special', getSpecial, async (req, res) => {
@@ -94,9 +98,11 @@ router.get("/special", getSpecial, async (req, res) => {
 async function getSpecial(req, res, next) {
   console.log(req.headers);
   console.log("Get special middleware");
-  const obj = getPlaceObject(req);
+  console.log(req.query);
   try {
-    let place = await Place.find(obj).exec();
+    const objy = req.query;
+    // const obj = getPlaceObject(req);
+    let place = await Place.find(objy).exec();
     console.log(`number of matched: ${place.length}`);
     res.place = place;
   } catch (err) {

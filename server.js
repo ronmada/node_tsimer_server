@@ -15,6 +15,18 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); //start s
 //readFile()    // get all places
 mongoConnection();
 routersInit();
+
+
+
+
+app.get("/", (req, res) => {
+    console.log("home page");
+    res.send('hi');
+  });
+
+
+
+
 app.get("/", () => {
   console.log("main root");
 });

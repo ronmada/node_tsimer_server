@@ -47,7 +47,7 @@ POST http://localhost:5000/places/special/
 Content-Type: application/json
 
 {
-    "area" : "צפון",
+    "area" : "negev",
     "animal" : true,
     "handicap" : true,
     "shaabaat_keep" : false
