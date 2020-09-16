@@ -52,3 +52,12 @@ Content-Type: application/json
     "handicap" : true,
     "shaabaat_keep" : false
 }
+
+###
+GET  http://localhost:5000/places/locations2/Isra
+###
+
+
+###
+GET  http://localhost:5000/places/locations/
+###

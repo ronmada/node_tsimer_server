@@ -4,7 +4,7 @@ const Place = require("../models/place");
 const { getTime } = require("./getTime");
 // const getPlaceObject = require("../getPlaceObject");
 
-router.use(getTime)
+router.use(getTime);
 
 var i = 0;
 var j = 0;
@@ -74,19 +74,51 @@ router.get("/locations", getlocations, async (req, res) => {
 });
 async function getlocations(req, res, next) {
   try {
-    console.log("getting all possible locations from DB" , res.timeNow);
-    let loca = await Place.find({}, "location -_id").lean();
-    let arr = [];
+    console.log("getting all possible locations from DB", res.timeNow);
+    const loca = await Place.find({}, "location -_id").exec();
+    const arr = [];
     for (let index in loca) {
       arr.push(loca[index].location);
     }
-    res.locations = arr;
+    res.locations = [...arr];
     next();
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-  
 }
+async function getlocations2(req, res, next) {
+  try {
+    console.log("getting all possible locations from DB222222", res.timeNow);
+    const regexp = new RegExp(req.params.location,"gi");
+    console.log(regexp)
+    const something = await Place.find({ location: { $regex: regexp } },"location -_id").exec()
+    console.log(something)
+    const arr=[]
+
+    for(let i in something){
+      arr.push(something[i].location)
+    }
+    // for(const [key,] of Object.entries(something)){
+    //   console.log(something[i][key])
+    //   arr.push()
+    // }
+    // Object.entries(something).forEach(([key,],i)=> {
+    //   console.log(`${i} ,   ${key}`)
+    //   console.log(something[i][key])
+    //   arr.push(something[i][key])
+    // })
+    console.log(arr)
+    res.locations2 = arr
+    console.log(`number of results from this regexp ${regexp}: ${arr.length}`)
+    next();
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
+router.get("/locations2/:location", getlocations2, (req, res) => {
+  res.status(200).json(res.locations2);
+});
+
 //get area,animal
 router.get("/special", getSpecial, (req, res) => {
   res.status(200).json(res.place);
