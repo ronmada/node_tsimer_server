@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ###
-GET  http://localhost:5000/places/locations2/Isra
+GET  http://localhost:5000/places/locations2/   
 ###
 
 
