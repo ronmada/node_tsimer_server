@@ -61,3 +61,11 @@ GET  http://localhost:5000/places/locations2/
 ###
 GET  http://localhost:5000/places/locations/
 ###
+
+###
+GET  http://localhost:5000/
+
+###
+GET  http://localhost:5000/locations/israel/
+
+###
