@@ -17,7 +17,7 @@ app.use(cors())
 const PORT = process.env.PORT || 5000 //set port
 
 // readFile()    // get all places
-
+// locationScript() //get all locations from one collection and insert it to other collection for performance
 app.use(appUse.helloFunc)
 
 mongoConnection()

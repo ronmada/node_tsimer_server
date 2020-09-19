@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 const places = require('../controllers/places')
 
-
-router.get('/', places.getHotels, (req, res) => {
+router.get('/', places.getPlacesInfo, (req, res) => {
   res.status(200).json(res.placeListResults)
 })
 

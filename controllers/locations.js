@@ -1,9 +1,9 @@
-const Place = require('../models/place')
+const Location = require('../models/location')
 
 exports.getlocations = async (req, res, next) => {
   try {
     const regexp = new RegExp(req.params.location, 'gi')
-    const locationList = await Place.find(
+    const locationList = await Location.find(
       { location: { $regex: regexp } },
       '-_id -__v'
     ).exec()
@@ -17,8 +17,8 @@ exports.getlocations = async (req, res, next) => {
     console.log(
       `number of results from this regexp ${regexp}: ${locationsSortedArray.length}`
     )
-    next()
   } catch (err) {
     return res.status(500).json({ message: err.message })
   }
+  next()
 }
