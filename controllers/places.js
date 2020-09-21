@@ -3,8 +3,10 @@ const Place = require('../models/place')
 exports.getPlacesInfo = async (req, res, next) => {
   console.log('parameters from form:')
   console.log(req.query)
+  req.query.location = new RegExp(req.query.location, 'gi')
+  console.log(req.query)
   try {
-    const placeListResults = await Place.find(req.query).exec()
+    const placeListResults = await Place.find(req.query, '-_id -__v',).limit(50).sort('city').exec()
     console.log(`number of matched: ${placeListResults.length}`)
     res.placeListResults = placeListResults
   } catch (err) {
