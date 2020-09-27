@@ -6,7 +6,7 @@ exports.getPlacesInfo = async (req, res, next) => {
   req.query.location = new RegExp(req.query.location, 'gi')
   console.log(req.query)
   try {
-    const placeListResults = await Place.find(req.query, '-_id -__v',).limit(50).sort('city').exec()
+    const placeListResults = await Place.find(req.query, '-_id -__v',).limit(8).sort('city').exec()
     console.log(`number of matched: ${placeListResults.length}`)
     res.placeListResults = placeListResults
   } catch (err) {
