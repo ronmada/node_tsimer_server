@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoConnection = require('./mongoConnection')
 const routes = require('./routes')
+const os = require('os');
 // const locationScript = require('./locationScripts')
 // const readFile = require("./readFile");
 /*global process*/
@@ -19,9 +20,11 @@ const PORT = process.env.PORT || 5000 //set port
 // readFile()    // get all places
 // locationScript() //get all locations from one collection and insert it to other collection for performance
 app.use(appUse.helloFunc)
-
+app.get('/', (req, res) => {
+    res.status(200).send(`<h7>${req.hostname}</h7>`)
+  })
 mongoConnection()
-
+console.log(os.networkInterfaces())
 routes()
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)) //start server
 
